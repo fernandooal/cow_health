@@ -28,9 +28,28 @@ class AppPanelProvider extends PanelProvider
             ->path('app')
             ->login()
             ->databaseNotifications()
-            ->colors([
-                'primary' => Color::Amber,
+            ->databaseNotificationsPolling(null)
+            ->globalSearch()
+            ->sidebarCollapsibleOnDesktop()
+            ->navigationGroups([
+
             ])
+            ->colors([
+                'primary' => Color::Violet,
+                'secondary' => Color::Orange,
+                'ternary' => Color::Purple,
+                'info' => Color::Blue,
+                'danger' => Color::Red,
+                'success' => Color::Emerald,
+                'warning' => Color::Amber,
+                'inative' => Color::Gray,
+            ])
+            ->favicon(asset('images/favicon.ico'))
+            ->brandLogoHeight(fn()=>auth()->check()?'4rem':'8rem')
+            ->brandLogo(asset('images/primary-logo.svg'))
+            ->darkModeBrandLogo(asset('images/ternary-logo.svg'))
+            ->brandName('Cow Health AI - PUCPR')
+            ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -38,8 +57,8 @@ class AppPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+//                Widgets\AccountWidget::class,
+//                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
