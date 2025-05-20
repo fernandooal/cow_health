@@ -17,13 +17,29 @@ class CowResource extends Resource
 {
     protected static ?string $model = Cow::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'phosphor-cow';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DatePicker::make('birth_date')
+                    ->required(),
+                Forms\Components\TextInput::make('weight')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('cow_photos'),
+                Forms\Components\Toggle::make('needs_treatment')
+                    ->required(),
+                Forms\Components\TextInput::make('farm_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('collar_id')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,7 +47,30 @@ class CowResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('birth_date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('weight')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('needs_treatment')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('farm_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('collar_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

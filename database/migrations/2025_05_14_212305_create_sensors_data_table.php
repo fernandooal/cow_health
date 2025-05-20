@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('sensors_data', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cow_id')->constrained('cows')->onDelete('cascade');
+            $table->foreignId('collar_id')->constrained('collars')->onDelete('cascade');
+            $table->string('model');
+            $table->timestamp('date_time');
+            $table->string('type');
             $table->timestamps();
         });
     }

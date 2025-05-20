@@ -23,7 +23,12 @@ class TemperatureDataResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('sensors_data_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('temperature')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,7 +36,20 @@ class TemperatureDataResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('sensors_data_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('temperature')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

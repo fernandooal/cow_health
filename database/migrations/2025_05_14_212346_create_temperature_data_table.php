@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('temperature_data', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('sensors_data_id');
+            $table->float('temperature');
             $table->timestamps();
+
+            $table->foreign('sensors_data_id')->references('id')->on('sensors_data')->onDelete('cascade');
         });
     }
 

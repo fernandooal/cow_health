@@ -23,7 +23,20 @@ class SensorsDataResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('cow_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('collar_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('model')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('date_time')
+                    ->required(),
+                Forms\Components\TextInput::make('type')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +44,27 @@ class SensorsDataResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('cow_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('collar_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('model')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('date_time')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

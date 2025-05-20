@@ -32,11 +32,11 @@ class AppPanelProvider extends PanelProvider
             ->globalSearch()
             ->sidebarCollapsibleOnDesktop()
             ->navigationGroups([
-
+                //
             ])
             ->colors([
-                'primary' => Color::Violet,
-                'secondary' => Color::Orange,
+                'primary' => Color::Orange,
+                'secondary' => Color::Cyan,
                 'ternary' => Color::Purple,
                 'info' => Color::Blue,
                 'danger' => Color::Red,
@@ -51,7 +51,7 @@ class AppPanelProvider extends PanelProvider
             ->brandName('Cow Health AI - PUCPR')
             ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverPages(in: app_path(   'Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])

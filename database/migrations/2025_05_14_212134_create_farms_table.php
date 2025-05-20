@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('farms', function (Blueprint $table) {
             $table->id();
+            $table->string('cnpj')->unique();
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
             $table->timestamps();
         });
     }

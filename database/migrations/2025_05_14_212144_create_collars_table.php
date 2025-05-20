@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('collars', function (Blueprint $table) {
             $table->id();
+            $table->string('status');
+            $table->integer('data_frequency');
             $table->timestamps();
         });
     }

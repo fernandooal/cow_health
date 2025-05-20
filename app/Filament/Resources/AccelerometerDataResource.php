@@ -23,7 +23,23 @@ class AccelerometerDataResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('sensors_data_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('gyro_x')
+                    ->numeric(),
+                Forms\Components\TextInput::make('gyro_y')
+                    ->numeric(),
+                Forms\Components\TextInput::make('gyro_z')
+                    ->numeric(),
+                Forms\Components\TextInput::make('accel_x')
+                    ->numeric(),
+                Forms\Components\TextInput::make('accel_y')
+                    ->numeric(),
+                Forms\Components\TextInput::make('accel_z')
+                    ->numeric(),
+                Forms\Components\Toggle::make('active')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +47,37 @@ class AccelerometerDataResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('sensors_data_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('gyro_x')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('gyro_y')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('gyro_z')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('accel_x')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('accel_y')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('accel_z')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('active')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
