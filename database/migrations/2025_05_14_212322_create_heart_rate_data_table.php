@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('heart_rate_data', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sensors_data_id');
+            $table->foreignId('collar_id')->constrained('collars')->onDelete('cascade');
             $table->integer('bpm');
             $table->timestamps();
-
-            $table->foreign('sensors_data_id')->references('id')->on('sensors_data')->onDelete('cascade');
         });
     }
 

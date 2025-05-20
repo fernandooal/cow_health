@@ -30,9 +30,10 @@ class AppPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->databaseNotificationsPolling(null)
             ->globalSearch()
-            ->sidebarCollapsibleOnDesktop()
+            ->topNavigation()
             ->navigationGroups([
-                //
+                'Menu Principal',
+                'Acessos'
             ])
             ->colors([
                 'primary' => Color::Orange,

@@ -11,11 +11,21 @@ class Collar extends Model
 
     public function cows()
     {
-        return $this->hasMany(Cow::class);
+        return $this->belongsTo(Cow::class);
     }
 
-    public function sensorsData()
+    public function heartRateData()
     {
-        return $this->hasMany(SensorsData::class);
+        return $this->hasMany(HeartRateData::class);
+    }
+
+    public function temperatureData()
+    {
+        return $this->hasMany(TemperatureData::class);
+    }
+
+    public function accelerometerData()
+    {
+        return $this->hasMany(AccelerometerData::class);
     }
 }

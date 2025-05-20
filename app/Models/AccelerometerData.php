@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AccelerometerData extends Model
 {
     protected $fillable = [
-        'sensors_data_id',
+        'collar_id',
         'gyro_x',
         'gyro_y',
         'gyro_z',
@@ -18,8 +18,8 @@ class AccelerometerData extends Model
         'active'
     ];
 
-    public function sensorsData()
+    public function collar()
     {
-        return $this->belongsTo(SensorsData::class);
+        return $this->belongsTo(Collar::class);
     }
 }

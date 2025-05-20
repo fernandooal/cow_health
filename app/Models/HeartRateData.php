@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class HeartRateData extends Model
 {
-    protected $fillable = ['sensors_data_id', 'bpm'];
+    protected $fillable = ['collar_id', 'bpm'];
 
-    public function sensorsData()
+    public function collar()
     {
-        return $this->belongsTo(SensorsData::class);
+        return $this->belongsTo(Collar::class);
     }
 }

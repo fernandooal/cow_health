@@ -16,8 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CowResource extends Resource
 {
     protected static ?string $model = Cow::class;
-
+    protected static ?string $label = 'Vaca';
     protected static ?string $navigationIcon = 'phosphor-cow';
+    protected static ?string $navigationGroup = 'Menu Principal';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -27,6 +29,8 @@ class CowResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('birth_date')
+                    ->required(),
+                Forms\Components\TextInput::make('race')
                     ->required(),
                 Forms\Components\TextInput::make('weight')
                     ->required()

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('birth_date');
             $table->float('weight');
+            $table->string('race');
             $table->json('cow_photos')->nullable();
             $table->boolean('needs_treatment')->default(false);
             $table->foreignId('farm_id')->constrained()->onDelete('cascade');

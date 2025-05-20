@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class TemperatureData extends Model
 {
-    protected $fillable = ['sensors_data_id', 'temperature'];
+    protected $fillable = ['collar_id', 'temperature'];
 
-    public function sensorsData()
+    public function collar()
     {
-        return $this->belongsTo(SensorsData::class);
+        return $this->belongsTo(Collar::class);
     }
 }

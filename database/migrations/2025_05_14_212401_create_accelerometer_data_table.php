@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('accelerometer_data', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sensors_data_id');
+            $table->foreignId('collar_id')->constrained('collars')->onDelete('cascade');
             $table->float('gyro_x')->nullable();
             $table->float('gyro_y')->nullable();
             $table->float('gyro_z')->nullable();
@@ -22,8 +22,6 @@ return new class extends Migration
             $table->float('accel_z')->nullable();
             $table->boolean('active')->default(false);
             $table->timestamps();
-
-            $table->foreign('sensors_data_id')->references('id')->on('sensors_data')->onDelete('cascade');
         });
     }
 

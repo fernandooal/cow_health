@@ -16,8 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CollarResource extends Resource
 {
     protected static ?string $model = Collar::class;
-
+    protected static ?string $label = 'Colar';
+    protected static ?string $pluralLabel = 'Colares';
     protected static ?string $navigationIcon = 'phosphor-belt';
+    protected static ?string $navigationGroup = 'Menu Principal';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

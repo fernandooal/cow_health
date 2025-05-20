@@ -11,6 +11,7 @@ class Cow extends Model
         'name',
         'birth_date',
         'weight',
+        'race',
         'cow_photo',
         'needs_treatment',
         'farm_id',
@@ -24,11 +25,6 @@ class Cow extends Model
 
     public function collar()
     {
-        return $this->belongsTo(Collar::class);
-    }
-
-    public function sensorsData()
-    {
-        return $this->hasMany(SensorsData::class);
+        return $this->hasOne(Collar::class);
     }
 }
