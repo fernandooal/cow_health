@@ -2,16 +2,9 @@
 
 namespace App\Enums;
 
-use App\Enums\Permissions\AreaPermissions;
-use App\Enums\Permissions\AtivoPermissions;
-use App\Enums\Permissions\CategoriaPermissions;
-use App\Enums\Permissions\CentroResultadoPermissions;
-use App\Enums\Permissions\FornecedorPermissions;
-use App\Enums\Permissions\GrupoPermissions;
-use App\Enums\Permissions\MovimentacaoPermissions;
-use App\Enums\Permissions\MovimentacaoSoftwarePermissions;
-use App\Enums\Permissions\ResponsavelPermissions;
-use App\Enums\Permissions\SoftwarePermissions;
+use App\Enums\Permissions\CollarPermissions;
+use App\Enums\Permissions\CowPermissions;
+use App\Enums\Permissions\FarmPermissions;
 use App\Enums\Permissions\UserPermissions;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
@@ -20,11 +13,17 @@ use InvalidArgumentException;
 enum TipoPermissions: string implements HasColor, HasLabel
 {
     case User = 'user';
+    case Cow = 'cow';
+    case Farm = 'farm';
+    case Collar = 'collar';
 
     public function getLabel(): string
     {
         return match ($this) {
             self::User => 'Usuário',
+            self::Cow => 'Vaca',
+            self::Farm => 'Fazenda',
+            self::Collar => 'Colar'
         };
     }
 
@@ -32,6 +31,9 @@ enum TipoPermissions: string implements HasColor, HasLabel
     {
         return match ($this) {
             self::User => 'info',
+            self::Cow => 'info',
+            self::Farm => 'info',
+            self::Collar => 'info',
         };
     }
 
@@ -39,6 +41,9 @@ enum TipoPermissions: string implements HasColor, HasLabel
     {
         return match ($value) {
             'user' => self::User,
+            'cow' => self::Cow,
+            'farm' => self::Farm,
+            'collar' => self::Collar,
             default => throw new InvalidArgumentException("Invalid value: $value"),
         };
     }
@@ -47,6 +52,9 @@ enum TipoPermissions: string implements HasColor, HasLabel
     {
         return match ($this) {
             self::User => UserPermissions::class,
+            self::Cow => CowPermissions::class,
+            self::Farm => FarmPermissions::class,
+            self::Collar => CollarPermissions::class,
         };
     }
 }

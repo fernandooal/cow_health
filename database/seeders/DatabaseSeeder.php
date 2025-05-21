@@ -35,66 +35,22 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'Update User'])->syncRoles([$admin, $superAdmin]);
         Permission::create(['name' => 'Delete User'])->syncRoles([$admin, $superAdmin]);
 
-        Permission::create(['name' => 'ViewAny Ativo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Ativo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Ativo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Ativo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Ativo'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'ViewAny Cow'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'View Cow'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Create Cow'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Update Cow'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Delete Cow'])->syncRoles([$admin, $superAdmin]);
 
-        Permission::create(['name' => 'ViewAny Software'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Software'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Software'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Software'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Software'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'ViewAny Farm'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'View Farm'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Create Farm'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Update Farm'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Delete Farm'])->syncRoles([$admin, $superAdmin]);
 
-        Permission::create(['name' => 'ViewAny Fornecedor'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Fornecedor'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Fornecedor'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Fornecedor'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Fornecedor'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny Responsavel'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Responsavel'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Responsavel'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Responsavel'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Responsavel'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny Area'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Area'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Area'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Area'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Area'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny CentroResultado'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View CentroResultado'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create CentroResultado'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update CentroResultado'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete CentroResultado'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny Grupo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Grupo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Grupo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Grupo'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Grupo'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny Categoria'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Categoria'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Categoria'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Categoria'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Categoria'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny Movimentacao'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View Movimentacao'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create Movimentacao'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update Movimentacao'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete Movimentacao'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Export Movimentacao'])->syncRoles([$admin, $superAdmin]);
-
-        Permission::create(['name' => 'ViewAny MovimentacaoSoftware'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'View MovimentacaoSoftware'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Create MovimentacaoSoftware'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Update MovimentacaoSoftware'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Delete MovimentacaoSoftware'])->syncRoles([$admin, $superAdmin]);
-        Permission::create(['name' => 'Export MovimentacaoSoftware'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'ViewAny Collar'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'View Collar'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Create Collar'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Update Collar'])->syncRoles([$admin, $superAdmin]);
+        Permission::create(['name' => 'Delete Collar'])->syncRoles([$admin, $superAdmin]);
     }
 }

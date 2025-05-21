@@ -9,22 +9,22 @@ class Collar extends Model
 {
     protected $fillable = ['status', 'data_frequency'];
 
-    public function cows()
+    public function cow()
     {
         return $this->belongsTo(Cow::class);
     }
 
-    public function heartRateData()
+    public function heartRateDatas()
     {
         return $this->hasMany(HeartRateData::class);
     }
 
-    public function temperatureData()
+    public function temperatureDatas()
     {
         return $this->hasMany(TemperatureData::class);
     }
 
-    public function accelerometerData()
+    public function accelerometerDatas()
     {
         return $this->hasMany(AccelerometerData::class);
     }
