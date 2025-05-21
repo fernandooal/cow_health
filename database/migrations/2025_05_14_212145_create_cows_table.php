@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('weight');
             $table->string('race');
             $table->json('cow_photos')->nullable();
-            $table->boolean('needs_treatment')->default(false);
+            $table->string('status');
             $table->foreignId('farm_id')->constrained()->onDelete('cascade');
             $table->foreignId('collar_id')->constrained()->onDelete('cascade');
             $table->timestamps();

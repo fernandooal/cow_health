@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\CollarStatus;
 use App\Filament\Resources\CollarResource\Pages;
 use App\Filament\Resources\CollarResource\RelationManagers;
 use App\Models\Collar;
+use Faker\Provider\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,12 +28,24 @@ class CollarResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('data_frequency')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\TextInput::make('name')
+                    ->label('Nome')
+                    ->maxLength(255)
+                    ->required(),
+                Forms\Components\Select::make('data_frequency')
+                    ->label('Frequência de Dados')
+                    ->options([
+                        10 => 'Padrão',
+
+                    ])
+                    ->helperText('Selecione a frequência do recebimento dos dados.')
+                    ->required(),
+                Forms\Components\ToggleButtons::make('status')
+                    ->label('Status do Colar')
+                    ->inline()
+                    ->options(CollarStatus::class)
+                    ->columnSpanFull()
+                    ->required(),
             ]);
     }
 
@@ -39,17 +53,31 @@ class CollarResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nome')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->label('Status')
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('data_frequency')
+                    ->label('Frequência de Dados')
                     ->numeric()
-                    ->sortable(),
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Criado Em')
+                    ->dateTime('d M Y - H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Atualizado Em')
+                    ->dateTime('d M Y - H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -57,7 +85,10 @@ class CollarResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,8 +108,8 @@ class CollarResource extends Resource
     {
         return [
             'index' => Pages\ListCollars::route('/'),
-            'create' => Pages\CreateCollar::route('/create'),
-            'edit' => Pages\EditCollar::route('/{record}/edit'),
+//            'create' => Pages\CreateCollar::route('/create'),
+//            'edit' => Pages\EditCollar::route('/{record}/edit'),
         ];
     }
 }
