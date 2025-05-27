@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TemperatureData extends Model
 {
-    protected $fillable = ['collar_id', 'temperature'];
+    use HasFactory;
+    protected $fillable = ['cow_id', 'temperature'];
 
-    public function collar()
+    public function cow()
     {
-        return $this->belongsTo(Collar::class, 'collar_id');
+        return $this->belongsTo(Cow::class, 'cow_id');
     }
 }

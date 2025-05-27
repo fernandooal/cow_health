@@ -50,6 +50,7 @@ class CollarResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->paginated(['10', '25', '50', '100'])
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nome')
@@ -88,9 +89,7 @@ class CollarResource extends Resource
                 ]),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ]);
     }
 

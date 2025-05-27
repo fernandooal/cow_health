@@ -17,7 +17,9 @@ class CollarFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'status' => $this->faker->randomElement(['ok', 'manutencao', 'bateria', 'inativo']),
+            'data_frequency' => $this->faker->randomElement(['2', '10', '60']),
         ];
     }
 }

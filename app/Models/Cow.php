@@ -15,7 +15,6 @@ class Cow extends Model
         'race',
         'cow_photos',
         'status',
-        'needs_treatment',
         'farm_id',
         'collar_id'
     ];
@@ -36,15 +35,15 @@ class Cow extends Model
 
     public function heartRateDatas()
     {
-        return $this->collar->heartRateDatas();
+        return $this->hasMany(HeartRateData::class, 'cow_id');
     }
 
     public function temperatureDatas()
     {
-        return $this->collar->temperatureDatas();
+        return $this->hasMany(TemperatureData::class, 'cow_id');
     }
     public function accelerometerDatas()
     {
-        return $this->collar->accelerometerDatas();
+        return $this->hasMany(AccelerometerData::class, 'cow_id');
     }
 }

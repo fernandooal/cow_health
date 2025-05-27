@@ -17,7 +17,13 @@ class AccelerometerDataFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'cow_id' => $this->faker->randomElement([1, 2]),
+            'gyro_x' => $this->faker->randomFloat(2, -10, 10),
+            'gyro_y' => $this->faker->randomFloat(2, -10, 10),
+            'gyro_z' => $this->faker->randomFloat(2, -10, 10),
+            'accel_x' => $this->faker->randomFloat(2, -10, 10),
+            'accel_y' => $this->faker->randomFloat(2, -10, 10),
+            'accel_z' => $this->faker->randomFloat(2, -10, 10),
         ];
     }
 }

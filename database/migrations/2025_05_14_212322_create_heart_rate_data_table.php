@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('heart_rate_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collar_id')->constrained('collars')->onDelete('cascade');
+            $table->foreignId('cow_id');
             $table->integer('bpm');
             $table->timestamps();
         });

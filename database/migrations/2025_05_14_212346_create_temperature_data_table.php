@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('temperature_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collar_id')->constrained('collars')->onDelete('cascade');
+            $table->foreignId('cow_id');
             $table->float('temperature');
             $table->timestamps();
         });

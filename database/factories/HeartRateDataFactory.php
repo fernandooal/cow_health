@@ -17,7 +17,8 @@ class HeartRateDataFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'cow_id' => $this->faker->randomElement([1, 2]),
+            'bpm' => $this->faker->numberBetween(60, 120),
         ];
     }
 }

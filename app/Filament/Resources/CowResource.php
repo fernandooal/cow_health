@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\CowStatus;
 use App\Filament\Resources\CowResource\Pages;
 use App\Filament\Resources\CowResource\RelationManagers;
+use App\Filament\Resources\CowResource\Widgets\CowsOverview;
 use App\Models\Cow;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -53,8 +54,7 @@ class CowResource extends Resource
                         Forms\Components\Select::make('collar_id')
                             ->label('Coleira')
                             ->relationship('collar', 'name')
-                            ->searchable()
-                            ->required(),
+                            ->searchable(),
                         Forms\Components\ToggleButtons::make('status')
                             ->options(CowStatus::class)
                             ->inline()
@@ -77,6 +77,7 @@ class CowResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->paginated(['10', '25', '50', '100'])
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nome')

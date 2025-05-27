@@ -17,7 +17,8 @@ class TemperatureDataFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'cow_id' => $this->faker->randomElement([1, 2]),
+            'temperature' => $this->faker->numberBetween(36, 40),
         ];
     }
 }

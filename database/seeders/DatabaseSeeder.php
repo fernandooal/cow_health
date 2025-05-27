@@ -2,10 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Enums\CollarStatus;
+use App\Enums\DataFrequency;
 use App\Enums\UserPerfil;
+use App\Models\AccelerometerData;
+use App\Models\Collar;
+use App\Models\Farm;
+use App\Models\HeartRateData;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\TemperatureData;
 use App\Models\User;
+use Database\Factories\CollarFactory;
+use Database\Factories\CowFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -52,5 +61,43 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'Create Collar'])->syncRoles([$admin, $superAdmin]);
         Permission::create(['name' => 'Update Collar'])->syncRoles([$admin, $superAdmin]);
         Permission::create(['name' => 'Delete Collar'])->syncRoles([$admin, $superAdmin]);
+
+        Farm::factory()->count(3)->create();
+
+        CollarFactory::new()->create([
+            'name' => 'Collar 1',
+            'status' => CollarStatus::OK,
+            'data_frequency' => DataFrequency::Padrao,
+        ]);
+
+        CollarFactory::new()->create([
+            'name' => 'Collar 2',
+            'status' => CollarStatus::OK,
+            'data_frequency' => DataFrequency::Rapido,
+        ]);
+
+        CowFactory::new()->create([
+            'name' => 'Bessie',
+            'birth_date' => '2020-01-01',
+            'weight' => 500,
+            'race' => 'Holstein',
+            'status' => 'ok',
+            'farm_id' => 1,
+            'collar_id' => 1,
+        ]);
+
+        CowFactory::new()->create([
+            'name' => 'Daisy',
+            'birth_date' => '2021-02-15',
+            'weight' => 550,
+            'race' => 'Jersey',
+            'status' => 'atencao',
+            'farm_id' => 2,
+            'collar_id' => 2,
+        ]);
+
+        AccelerometerData::factory()->count(100)->create();
+        TemperatureData::factory()->count(100)->create();
+        HeartRateData::factory()->count(100)->create();
     }
 }

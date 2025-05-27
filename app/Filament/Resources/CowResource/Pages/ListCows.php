@@ -16,4 +16,11 @@ class ListCows extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            CowResource\Widgets\CowsOverview::class,
+        ];
+    }
 }

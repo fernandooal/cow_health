@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('accelerometer_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collar_id')->constrained('collars')->onDelete('cascade');
+            $table->foreignId('cow_id');
             $table->float('gyro_x')->nullable();
             $table->float('gyro_y')->nullable();
             $table->float('gyro_z')->nullable();

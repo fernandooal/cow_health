@@ -20,7 +20,7 @@ return new class extends Migration
             $table->json('cow_photos')->nullable();
             $table->string('status');
             $table->foreignId('farm_id')->constrained()->onDelete('cascade');
-            $table->foreignId('collar_id')->constrained()->onDelete('cascade');
+            $table->foreignId('collar_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

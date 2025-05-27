@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collar extends Model
 {
+    use HasFactory;
     protected $fillable = ['name', 'status', 'data_frequency'];
     protected $casts = [
         'status' => CollarStatus::class,
@@ -18,20 +19,5 @@ class Collar extends Model
     public function cow()
     {
         return $this->hasOne(Cow::class, 'collar_id');
-    }
-
-    public function heartRateDatas()
-    {
-        return $this->hasMany(HeartRateData::class, 'collar_id');
-    }
-
-    public function temperatureDatas()
-    {
-        return $this->hasMany(TemperatureData::class, 'collar_id');
-    }
-
-    public function accelerometerDatas()
-    {
-        return $this->hasMany(AccelerometerData::class, 'collar_id');
     }
 }
