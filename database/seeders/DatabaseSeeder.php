@@ -77,6 +77,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CowFactory::new()->create([
+            'tag' => '123',
             'name' => 'Bessie',
             'birth_date' => '2020-01-01',
             'weight' => 500,
@@ -87,6 +88,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CowFactory::new()->create([
+            'tag' => '456',
             'name' => 'Daisy',
             'birth_date' => '2021-02-15',
             'weight' => 550,

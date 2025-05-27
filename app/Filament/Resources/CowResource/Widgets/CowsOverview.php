@@ -28,7 +28,7 @@ class CowsOverview extends BaseWidget
             Stat::make('Fazenda com o maior número de vacas', $cowsByFarm->cows_count ?? 'Nenhuma vaca cadastrada')
                 ->description('Fazenda: ' . ($cowsByFarm->name ?? 'Nenhuma vaca cadastrada'))
                 ->color('success')
-                ->icon('heroicon-o-shopping-bag'),
+                ->icon('phosphor-barn'),
         ];
     }
 }

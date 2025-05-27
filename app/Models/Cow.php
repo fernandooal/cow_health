@@ -15,6 +15,7 @@ class Cow extends Model
         'race',
         'cow_photos',
         'status',
+        'tag',
         'farm_id',
         'collar_id'
     ];
