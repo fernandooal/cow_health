@@ -34,6 +34,7 @@ class CollarResource extends Resource
                     ->inline()
                     ->options(CollarStatus::class)
                     ->columnSpanFull()
+                    ->default(CollarStatus::OK)
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->label('Nome')
