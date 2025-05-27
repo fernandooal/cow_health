@@ -20,6 +20,6 @@ class AccelerometerData extends Model
 
     public function collar()
     {
-        return $this->belongsTo(Collar::class);
+        return $this->belongsTo(Collar::class, 'collar_id');
     }
 }

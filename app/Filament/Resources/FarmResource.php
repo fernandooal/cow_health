@@ -72,6 +72,7 @@ class FarmResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('address')
                     ->label('Endereço')
+                    ->wrap()
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Criado Em')

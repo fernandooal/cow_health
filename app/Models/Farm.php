@@ -17,7 +17,7 @@ class Farm extends Model
 
     public function cows()
     {
-        return $this->hasMany(Cow::class);
+        return $this->hasMany(Cow::class, 'farm_id');
     }
 }
 

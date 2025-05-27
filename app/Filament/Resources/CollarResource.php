@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\CollarStatus;
+use App\Enums\DataFrequency;
 use App\Filament\Resources\CollarResource\Pages;
 use App\Filament\Resources\CollarResource\RelationManagers;
 use App\Models\Collar;
@@ -28,23 +29,20 @@ class CollarResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\ToggleButtons::make('status')
+                    ->label('Status do Colar')
+                    ->inline()
+                    ->options(CollarStatus::class)
+                    ->columnSpanFull()
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->label('Nome')
                     ->maxLength(255)
                     ->required(),
                 Forms\Components\Select::make('data_frequency')
                     ->label('Frequência de Dados')
-                    ->options([
-                        10 => 'Padrão',
-
-                    ])
+                    ->options(DataFrequency::class)
                     ->helperText('Selecione a frequência do recebimento dos dados.')
-                    ->required(),
-                Forms\Components\ToggleButtons::make('status')
-                    ->label('Status do Colar')
-                    ->inline()
-                    ->options(CollarStatus::class)
-                    ->columnSpanFull()
                     ->required(),
             ]);
     }
@@ -66,7 +64,6 @@ class CollarResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('data_frequency')
                     ->label('Frequência de Dados')
-                    ->numeric()
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),

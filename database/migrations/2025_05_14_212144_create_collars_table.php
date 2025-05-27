@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status');
-            $table->integer('data_frequency');
+            $table->string('data_frequency');
             $table->timestamps();
         });
     }
