@@ -5,15 +5,15 @@ namespace App\Filament\Resources;
 use App\Enums\CowStatus;
 use App\Filament\Resources\CowResource\Pages;
 use App\Filament\Resources\CowResource\RelationManagers;
-use App\Filament\Resources\CowResource\Widgets\CowsOverview;
 use App\Models\Cow;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 
 class CowResource extends Resource
 {
@@ -22,6 +22,7 @@ class CowResource extends Resource
     protected static ?string $navigationIcon = 'phosphor-cow';
     protected static ?string $navigationGroup = 'Menu Principal';
     protected static ?int $navigationSort = 2;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -63,11 +64,9 @@ class CowResource extends Resource
                             ->required(),
                         Forms\Components\FileUpload::make('cow_photos')
                             ->label('Fotos')
-                            ->maxFiles(3)
                             ->directory('cows')
                             ->disk('public')
                             ->image()
-                            ->multiple()
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
@@ -77,62 +76,45 @@ class CowResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->paginated(['10', '25', '50', '100'])
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Nome')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('birth_date')
-                    ->label('Data de Nascimento')
-                    ->date('d M Y')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('weight')
-                    ->label('Peso (KG)')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('race')
-                    ->label('Raça')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('farm.name')
-                    ->label('Fazenda')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('collar.name')
-                    ->label('Coleira')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('collar.status')
-                    ->label('Status da Coleira')
-                    ->sortable()
-                    ->badge()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Criado Em')
-                    ->dateTime('d M Y - H:i')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Atualizado Em')
-                    ->dateTime('d M Y - H:i')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\Layout\Stack::make([
+                    Tables\Columns\ImageColumn::make('cow_photos')
+                        ->height('100%')
+                        ->width('100%'),
+                    Tables\Columns\Layout\Stack::make([
+                        Tables\Columns\TextColumn::make('name')
+                            ->weight('bold'),
+                        Tables\Columns\TextColumn::make('status')
+                            ->limit(30),
+                        Tables\Columns\TextColumn::make('race')
+                            ->color('gray')
+                            ->limit(30),
+                        Tables\Columns\TextColumn::make('farm.name')
+                            ->color('gray')
+                            ->limit(30),
+                    ]),
+                ])->space(3),
+                Tables\Columns\Layout\Panel::make([
+                    Tables\Columns\TextColumn::make('birth_date')
+                        ->formatStateUsing(fn ($state) => 'Data de Nascimento: ' . Carbon::parse($state)->format('d M Y'))
+                        ->grow(false),
+                    Tables\Columns\TextColumn::make('weight')
+                        ->formatStateUsing(fn ($state) => 'Kg: ' . Carbon::parse($state)->format('KG'))
+                        ->grow(false),
+                    Tables\Columns\TextColumn::make('collar.name')
+                        ->formatStateUsing(fn ($state) => 'Coleira: ' . $state)
+                        ->label('Coleira'),
+                ])->collapsible(),
             ])
-            ->filters([
-                //
+            ->contentGrid([
+                'md' => 2,
+                'xl' => 3,
             ])
+            ->paginated([9, 24, 49, 99])
             ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make(),
-                ]),
+                Tables\Actions\ViewAction::make()->color('info'),
+                Tables\Actions\EditAction::make()->color('primary'),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 //
@@ -146,6 +128,16 @@ class CowResource extends Resource
             RelationManagers\HeartRateRelationManager::class,
             RelationManagers\AccelerometerRelationManager::class,
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'farm.name', 'collar.name'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->farm->name . ' - ' . $record->name;
     }
 
     public static function getPages(): array

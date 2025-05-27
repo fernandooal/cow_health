@@ -10,8 +10,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 use Leandrocfe\FilamentPtbrFormFields\Document;
 
 class FarmResource extends Resource
@@ -21,6 +21,7 @@ class FarmResource extends Resource
     protected static ?string $navigationIcon = 'phosphor-barn';
     protected static ?string $navigationGroup = 'Menu Principal';
     protected static ?int $navigationSort = 0;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -107,6 +108,16 @@ class FarmResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'cows.name', 'cnpj'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->name;
     }
 
     public static function getPages(): array

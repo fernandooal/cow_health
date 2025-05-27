@@ -7,14 +7,13 @@ use App\Enums\DataFrequency;
 use App\Filament\Resources\CollarResource\Pages;
 use App\Filament\Resources\CollarResource\RelationManagers;
 use App\Models\Collar;
-use Faker\Provider\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 
 class CollarResource extends Resource
 {
@@ -24,6 +23,7 @@ class CollarResource extends Resource
     protected static ?string $navigationIcon = 'phosphor-belt';
     protected static ?string $navigationGroup = 'Menu Principal';
     protected static ?int $navigationSort = 1;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -98,6 +98,16 @@ class CollarResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'cow.name'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->name;
     }
 
     public static function getPages(): array
