@@ -79,4 +79,12 @@ class ViewCow extends ViewRecord
                     ])->columns(2),
             ]);
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            CowResource\Widgets\CowHRStats::class,
+            CowResource\Widgets\CowTempStats::class,
+        ];
+    }
 }
