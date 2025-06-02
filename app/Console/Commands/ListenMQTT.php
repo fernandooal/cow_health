@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Services\MqttService;
+use App\Jobs\ProcessSensorData;
+use App\Services\MQTTService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -27,11 +28,12 @@ class ListenMQTT extends Command
      */
     public function handle()
     {
-        $mqtt = new MqttService();
-        $mqtt->subscribe('iot/sensor/temperatura', function ($topic, $message) {
-            Log::info("Recebido do tópico {$topic}: {$message}");
+        $mqtt = new MQTTService();
 
+        $mqtt->subscribe('project_ch_ai/send', function ($topic, $message) {
+            $data = json_decode($message, true);
 
+            ProcessSensorData::dispatch($data);
         });
     }
 }

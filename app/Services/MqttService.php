@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use PhpMqtt\Client\Exceptions\ProtocolNotSupportedException;
 use PhpMqtt\Client\MqttClient;
 use PhpMqtt\Client\ConnectionSettings;
 
@@ -12,7 +11,7 @@ class MqttService
 
     public function __construct()
     {
-        $this->mqtt = new MqttClient('broker.hivemq.com', 1883, 'cow_health_web');
+        $this->mqtt = new MqttClient('broker.emqx.io', 1883, 'cow_health_web');
     }
 
     public function subscribe(string $topic, callable $callback)
