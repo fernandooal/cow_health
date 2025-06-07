@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Collar;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,7 +13,7 @@ class ProcessSensorData implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public array $data;
+    private array $data;
 
     public function __construct(array $data)
     {
@@ -26,20 +25,20 @@ class ProcessSensorData implements ShouldQueue
         $deviceId = $this->data['device_id'] ?? null;
         $sensorData = $this->data['sensors'] ?? [];
 
+        //incomplete data
         if (!$deviceId || empty($sensorData)) {
-            Log::warning('MQTT: Dados incompletos recebidos.', $this->data);
             return;
         }
 
         $collar = Collar::where('name', $deviceId)->first();
+        //collar not found
         if (!$collar) {
-            Log::warning("MQTT: Collar não encontrado para device_id: {$deviceId}");
             return;
         }
 
         $cow = $collar->cow;
+        //cow not found
         if (!$cow) {
-            Log::warning("MQTT: Vaca não encontrada para o collar de device_id: {$deviceId}");
             return;
         }
 
@@ -69,7 +68,7 @@ class ProcessSensorData implements ShouldQueue
             ]);
         }
 
-        Log::info("MQTT: Dados salvos com sucesso para cow_id={$cow->id}");
+        AnalyzeCowHealth::dispatch($cow);
     }
 }
 

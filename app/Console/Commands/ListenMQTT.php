@@ -32,8 +32,13 @@ class ListenMQTT extends Command
 
         $mqtt->subscribe('project_ch_ai/send', function ($topic, $message) {
             $data = json_decode($message, true);
-
-            ProcessSensorData::dispatch($data);
+            try {
+                Log::info('Tentando despachar job...');
+                ProcessSensorData::dispatch($data);
+                Log::info('Job despachado com sucesso');
+            } catch (\Throwable $e) {
+                Log::error('Erro ao despachar job: ' . $e->getMessage());
+            }
         });
     }
 }
