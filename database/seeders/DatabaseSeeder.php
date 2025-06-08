@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
             'birth_date' => '2021-02-15',
             'weight' => 550,
             'race' => 'Jersey',
-            'status' => 'atencao',
+            'status' => 'parto',
             'farm_id' => 2,
             'collar_id' => 2,
         ]);

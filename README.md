@@ -1,61 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🐄 Cow Health Web
+Interface web do sistema Cow Health AI, focado no monitoramento da saúde de vacas através de sensores inteligentes.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📋 Requisitos
+- Docker e Docker Compose instalados
+- Git instalado
+- make instalado (caso contrário, instale via sudo apt install make ou equivalente)
 
-## About Laravel
+## 🚀 Instalação
+Siga os passos abaixo para clonar e configurar o projeto:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```bash
+# Clone o repositório
+git clone https://github.com/Cow-Health-AI/cow-health-web.git
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Acesse o diretório do projeto
+cd cow-health-web
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Suba os containers em modo desacoplado
+docker compose up -d
+```
 
-## Learning Laravel
+# 🔧 Configuração
+```bash
+# Renomeie o arquivo de variáveis de ambiente
+mv .env.example .env
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Instale as dependências PHP
+composer install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+# Execute o comando de configuração geral
+make all
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚠️ Erro "make: command not found"
+Instale o make com:
 
-## Laravel Sponsors
+```bash
+sudo apt install make      # Debian/Ubuntu
+sudo dnf install make      # Fedora
+brew install make          # macOS
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 🛠 Solução de Problemas
+Se o container do MySQL falhar ao subir:
 
-### Premium Partners
+```bash
+# Pare e remova volumes
+docker compose down -v
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Recrie os containers
+docker compose up --build
+```
 
-## Contributing
+# 💻 Acesso ao container PHP e Instalação de dependências do frontend
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+# Entre no container PHP
+make p
 
-## Code of Conduct
+# Instale as dependências do frontend
+npm install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Compile os assets do frontend
+npm run build
+```
 
-## Security Vulnerabilities
+# ⚙️ Otimização e migração
+```bash
+# Otimize a aplicação
+php artisan optimize
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Rode as migrações com seed
+php artisan migrate --seed
+```
 
-## License
+# 📡 Conexão MQTT
+Para conectar a aplicação com o sistema embarcado via MQTT, abra dois terminais diferentes e execute os seguintes comandos:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+# Faz o subscribe no tópico e ouve os dados
+php artisan listen:mqtt
+
+# Executa os jobs
+php artisan queue:work
+```
+
+# ✅ Acesso ao sistema
+Abra seu navegador e acesse:
+
+```arduino
+http://localhost
+```
+Login de administrador padrão:
+
+- Email: admin@admin.com
+- Senha: admin1234
+
