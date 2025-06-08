@@ -10,17 +10,17 @@ use InvalidArgumentException;
 enum CowStatus: string implements HasIcon, HasLabel, HasColor
 {
     case OK = 'ok';
-    case Atencao = 'atencao';
-    case Urgente = 'urgente';
     case Parto = 'parto';
+    case Termico = 'termico';
+    case Urgente = 'urgente';
 
     public function getLabel(): string
     {
         return match ($this) {
             self::OK => 'Saudável',
-            self::Atencao => 'Necessita de Atenção',
             self::Urgente => 'Atendimento Urgente',
-            self::Parto => 'Trabalho de Parto'
+            self::Parto => 'Parto Iminente',
+            self::Termico => 'Estresse Térmico'
         };
     }
 
@@ -28,9 +28,9 @@ enum CowStatus: string implements HasIcon, HasLabel, HasColor
     {
         return match ($this) {
             self::OK => 'heroicon-o-check-badge',
-            self::Atencao => 'heroicon-o-eye',
             self::Urgente => 'heroicon-o-exclamation-triangle',
             self::Parto => 'phosphor-cow',
+            self::Termico => 'heroicon-o-fire',
         };
     }
 
@@ -38,9 +38,9 @@ enum CowStatus: string implements HasIcon, HasLabel, HasColor
     {
         return match ($this) {
             self::OK => 'success',
-            self::Atencao => 'warning',
             self::Urgente => 'danger',
             self::Parto => 'ternary',
+            self::Termico => 'danger',
         };
     }
 
@@ -48,9 +48,9 @@ enum CowStatus: string implements HasIcon, HasLabel, HasColor
     {
         return match ($value) {
             'ok' => self::OK,
-            'atencao' => self::Atencao,
             'urgente' => self::Urgente,
             'parto' => self::Parto,
+            'termico' => self::Termico,
             default => throw new InvalidArgumentException("Invalid status value: {$value}"),
         };
     }
