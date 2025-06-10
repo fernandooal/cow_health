@@ -30,15 +30,17 @@ class ListenMQTT extends Command
     {
         $mqtt = new MQTTService();
 
+        $this->info('Conectando ao broker MQTT e escutando o tópico...');
+
         $mqtt->subscribe('project_ch_ai/send', function ($topic, $message) {
+            $this->info('Mensagem recebida!');
             $data = json_decode($message, true);
             try {
-                Log::info('Tentando despachar job...');
                 ProcessSensorData::dispatch($data);
-                Log::info('Job despachado com sucesso');
             } catch (\Throwable $e) {
                 Log::error('Erro ao despachar job: ' . $e->getMessage());
             }
         });
     }
+
 }

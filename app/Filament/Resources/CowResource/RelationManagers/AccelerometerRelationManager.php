@@ -15,6 +15,7 @@ class AccelerometerRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->paginated(['10', '25', '50', '100'])
             ->columns([
                 Tables\Columns\TextColumn::make('gyro_x')
@@ -48,12 +49,12 @@ class AccelerometerRelationManager extends RelationManager
                     ->numeric()
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Recebido Em')
+                    ->label('Medido Em')
                     ->dateTime('d M Y - H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Atualizado Em')
+                    ->label('Recebido Em')
                     ->dateTime('d M Y - H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),

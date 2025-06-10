@@ -45,12 +45,14 @@ class ProcessSensorData implements ShouldQueue
         if (isset($sensorData['max30102']['heart_rate'])) {
             $cow->heartRateDatas()->create([
                 'bpm' => $sensorData['max30102']['heart_rate'],
+                'created_at' => $this->data['datetime']
             ]);
         }
 
         if (isset($sensorData['mlx']['object_temp'])) {
             $cow->temperatureDatas()->create([
                 'temperature' => $sensorData['mlx']['object_temp'],
+                'created_at' => $this->data['datetime']
             ]);
         }
 
@@ -65,6 +67,7 @@ class ProcessSensorData implements ShouldQueue
                 'gyro_x' => $gyroX,
                 'gyro_y' => $gyroY,
                 'gyro_z' => $gyroZ,
+                'created_at' => $this->data['datetime']
             ]);
         }
 
