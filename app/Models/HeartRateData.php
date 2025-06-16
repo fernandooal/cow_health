@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class HeartRateData extends Model
 {
     use HasFactory;
-    protected $fillable = ['cow_id', 'bpm'];
+    protected $fillable = ['cow_id', 'bpm', 'created_at', 'updated_at'];
 
     public function cow()
     {

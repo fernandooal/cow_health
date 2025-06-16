@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cow_id');
             $table->float('temperature');
-            $table->timestamps();
+            $table->dateTime('created_at')->default(now());
+            $table->dateTime('updated_at')->default(now());
         });
     }
 

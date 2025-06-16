@@ -16,6 +16,8 @@ class AccelerometerData extends Model
         'accel_x',
         'accel_y',
         'accel_z',
+        'created_at',
+        'updated_at'
     ];
 
     public function cow()

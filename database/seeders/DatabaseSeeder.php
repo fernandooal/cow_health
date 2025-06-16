@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         Farm::factory()->count(3)->create();
 
         CollarFactory::new()->create([
-            'name' => 'Collar 1',
+            'name' => 'chai_dev01',
             'status' => CollarStatus::OK,
             'data_frequency' => DataFrequency::Padrao,
         ]);

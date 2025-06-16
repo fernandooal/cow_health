@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TemperatureData extends Model
 {
     use HasFactory;
-    protected $fillable = ['cow_id', 'temperature'];
+    protected $fillable = ['cow_id', 'temperature', 'created_at', 'updated_at'];
 
     public function cow()
     {

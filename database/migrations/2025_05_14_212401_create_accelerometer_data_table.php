@@ -20,7 +20,8 @@ return new class extends Migration
             $table->float('accel_x')->nullable();
             $table->float('accel_y')->nullable();
             $table->float('accel_z')->nullable();
-            $table->timestamps();
+            $table->dateTime('created_at')->default(now());
+            $table->dateTime('updated_at')->default(now());
         });
     }
 
